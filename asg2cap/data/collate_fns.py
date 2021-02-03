@@ -8,7 +8,7 @@ from thexp.utils.timing import timeit
 # collate.default_collate()
 
 def convert_batch_sparse_matrix_collate_fn(batch_data: dict):
-    timeit.mark('convert')
+    # timeit.mark('convert')
     batch_size = len(batch_data)
     _sample = batch_data[0]
     max_nodes, _ = _sample['attn_fts'].shape
@@ -25,5 +25,5 @@ def convert_batch_sparse_matrix_collate_fn(batch_data: dict):
     [i.pop('flow_sparse_matrix') for i in batch_data]
     batch_data = collate.default_collate(batch_data)
     batch_data['rel_edges'] = torch.tensor(rel_edges)
-    timeit.mark('convert_e')
+    # timeit.mark('convert_e')
     return batch_data

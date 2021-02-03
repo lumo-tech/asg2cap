@@ -72,7 +72,7 @@ class ASGLoadDelegate(Delegate):
         return len(self.region_ids)
 
     def __call__(self, index, builder=None) -> Union[X, Y, ID, None, Iterable[_Value]]:
-        timeit.mark('delget')
+        # timeit.mark('delget')
         region_id = self.region_ids[index]
         with open(self.json_fs[index], 'r') as r:
             region_id_graph_map = json.load(r)
@@ -208,7 +208,7 @@ class ASGLoadDelegate(Delegate):
         flow_sparse_matrix = sparse.coo_matrix((_flow_edge_norms, (_flow_tgt_nodes, _flow_src_nodes)),
                                                shape=(self.max_attn_len, self.max_attn_len))
 
-        timeit.mark('delget_e')
+        # timeit.mark('delget_e')
         return (
             self.ID_(index, 'index'),
             self.ID_(region_id, 'region_ids'),
