@@ -27,6 +27,7 @@ class BaseTrainer(callbacks.BaseCBMixin,
 
     def train_batch(self, eidx, idx, global_step, batch_data, params: GlobalParams, device: torch.device):
         super().train_batch(eidx, idx, global_step, batch_data, params, device)
+        timeit.mark('a_load')
         meter = Meter()
         logits = self.model(batch_data)
 
@@ -41,6 +42,7 @@ class BaseTrainer(callbacks.BaseCBMixin,
 
         meter = timeit.meter()
         timeit.clear()
+        timeit.meter('a_trn')
         return meter
 
     def to_logits(self, xs) -> torch.Tensor:
