@@ -42,9 +42,9 @@ class BaseSupDatasetMixin(DatasetMixin):
         rel_path = 'asg2cap/ControllableImageCaption/MSCOCO'
         train_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train', rel_path),
                                                                params)
-        val_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train', rel_path),
+        val_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('eval', rel_path),
                                                              params)
-        test_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train', rel_path),
+        test_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('test', rel_path),
                                                               params)
 
         self.regist_databundler(train=train_dataloader,
