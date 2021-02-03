@@ -89,13 +89,16 @@ class BaseTrainer(callbacks.BaseCBMixin,
                 word_sents = []
                 gt_sents = []
                 for i, sent, gt_sent in zip(batch_data['index'], pred_sent, batch_data['caption_ids']):
+                    sent = sent.detach().cpu().numpy().tolist()
+                    gt_sent = gt_sent.detach().cpu().numpy().tolist()
+
                     sent = int2sent_func(sent)
                     gt_sent = int2sent_func(gt_sent)
                     gt_sents.append(gt_sent)
                     word_sents.append(sent)
 
-                gt_sents = {i: v for i, v in enumerate(gt_sents)}
-                word_sents = {i: v for i, v in enumerate(word_sents)}
+                gt_sents = {i: [v] for i, v in enumerate(gt_sents)}
+                word_sents = {i: [v] for i, v in enumerate(word_sents)}
 
                 self.acc_bleu_(gt_sents, word_sents, meter=meter)
                 self.acc_cider_(gt_sents, word_sents, meter=meter)
