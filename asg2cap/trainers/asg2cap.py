@@ -15,6 +15,7 @@ from torch.nn import functional as F
 
 from trainers import GlobalParams
 from trainers.mixin import *
+from thexp.utils.timing import timeit
 
 
 class BaseTrainer(callbacks.BaseCBMixin,
@@ -36,6 +37,7 @@ class BaseTrainer(callbacks.BaseCBMixin,
         meter.Lall.backward()
         self.optim.step()
 
+        meter.update(timeit.meter(ratio=False))
         return meter
 
     def to_logits(self, xs) -> torch.Tensor:

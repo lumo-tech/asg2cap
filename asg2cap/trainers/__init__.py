@@ -89,9 +89,9 @@ class GlobalParams(Params):
         if self.ENV.IS_PYCHARM_DEBUG:
             self.num_workers = 0
 
-        self.lr_sche = self.SCHE.Cos(start=self.optim.args.lr,
-                                     end=0.00001,
-                                     right=self.epoch)
+        # self.lr_sche = self.SCHE.Cos(start=self.optim.args.lr,
+        #                              end=0.00001,
+        #                              right=self.epoch)
 
         # Auto Choice encoder
         if self.architecture == 'node':
