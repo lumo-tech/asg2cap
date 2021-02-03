@@ -40,9 +40,9 @@ class BaseTrainer(callbacks.BaseCBMixin,
 
         meter.update(timeit.meter(ratio=False))
 
+        timeit.meter('a_trn')
         meter = timeit.meter()
         timeit.clear()
-        timeit.meter('a_trn')
         return meter
 
     def to_logits(self, xs) -> torch.Tensor:
