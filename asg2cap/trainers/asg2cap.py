@@ -63,7 +63,7 @@ class BaseTrainer(callbacks.BaseCBMixin,
                     states.append(torch.zeros((2, params.batch_size, self.params.hidden_size),
                                               dtype=torch.float32).to(self.device))
 
-                _, max_attn_len = batch_data['attn_masks']
+                _, max_attn_len = batch_data['attn_masks'].shape
                 prev_attn_score = torch.zeros((params.batch_size, max_attn_len), device=self.device)
                 prev_attn_score[:, 0] = 1
 
@@ -93,6 +93,9 @@ class BaseTrainer(callbacks.BaseCBMixin,
                     gt_sent = int2sent_func(gt_sent)
                     gt_sents.append(gt_sent)
                     word_sents.append(sent)
+
+                gt_sents = {i: v for i, v in enumerate(gt_sents)}
+                word_sents = {i: v for i, v in enumerate(word_sents)}
 
                 self.acc_bleu_(gt_sents, word_sents, meter=meter)
                 self.acc_cider_(gt_sents, word_sents, meter=meter)
