@@ -25,5 +25,5 @@ def convert_batch_sparse_matrix_collate_fn(batch_data: dict):
     [i.pop('flow_sparse_matrix') for i in batch_data]
     batch_data = collate.default_collate(batch_data)
     batch_data['rel_edges'] = torch.tensor(rel_edges)
-    timeit.mark('convert_')
+    timeit.mark('convert_e')
     return batch_data

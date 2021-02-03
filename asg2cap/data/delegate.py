@@ -208,7 +208,7 @@ class ASGLoadDelegate(Delegate):
         flow_sparse_matrix = sparse.coo_matrix((_flow_edge_norms, (_flow_tgt_nodes, _flow_src_nodes)),
                                                shape=(self.max_attn_len, self.max_attn_len))
 
-        timeit.mark('delget_')
+        timeit.mark('delget_e')
         return (
             self.ID_(index, 'index'),
             self.ID_(region_id, 'region_ids'),
