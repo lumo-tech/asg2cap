@@ -49,8 +49,8 @@ class ASGLoadDelegate(Delegate):
         edges.append([obj_node_i, rel_node_id, 5])
 
     def add_flow_edge(self, edge, obj_id, sub_id, edge_id):
-        edge.append((obj_id, edge_id))
-        edge.append((edge_id, sub_id))
+        edge.append((sub_id, edge_id))
+        edge.append((edge_id, obj_id))
 
     def __len__(self):
         return len(self.region_ids)
@@ -108,6 +108,8 @@ class ASGLoadDelegate(Delegate):
                 _n += 1
                 if _n >= self.max_attn_len:
                     break
+            if _n >= self.max_attn_len:
+                break
 
         if _n < self.max_attn_len:
             for graph in region_graph['relationships']:
