@@ -38,6 +38,8 @@ class BaseTrainer(callbacks.BaseCBMixin,
         self.optim.step()
 
         meter.update(timeit.meter(ratio=False))
+
+        meter = timeit.meter()
         timeit.clear()
         return meter
 
