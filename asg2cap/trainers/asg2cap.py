@@ -20,7 +20,7 @@ from trainers.mixin import *
 class BaseTrainer(callbacks.BaseCBMixin,
                   datasets.BaseSupDatasetMixin,
                   models.AsgModelMixin,
-                  acc.ClassifyAccMixin, acc.AccCider, acc.AccBleu,
+                  acc.AccCider, acc.AccBleu,
                   losses.CaptionLoss,
                   Trainer):
 
