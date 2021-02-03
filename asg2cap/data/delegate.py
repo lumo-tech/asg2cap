@@ -9,6 +9,10 @@ from thexp import Delegate
 from thexp.frame.builder import X, Y, ID, _Value
 from data import transforms
 
+from thexp import Logger
+
+log = Logger()
+
 
 class ASGLoadDelegate(Delegate):
 
@@ -27,6 +31,17 @@ class ASGLoadDelegate(Delegate):
 
         self.region_ids = region_id
         self.json_fs = json_fs
+
+        self.region_id_graph_maps = []
+
+        _size = len(json_fs)
+        log.info('load jsons')
+        for i, f in enumerate(json_fs):
+            log.inline(i, _size)
+            with open(f, 'r') as r:
+                region_id_graph_map = json.load(r)  # type:dict
+                self.region_id_graph_maps.append(region_id_graph_map)
+
         self.hdf5_fs = hdf5_fs
 
         self.mp_fts = mp_fts
@@ -57,8 +72,9 @@ class ASGLoadDelegate(Delegate):
 
     def __call__(self, index, builder=None) -> Union[X, Y, ID, None, Iterable[_Value]]:
         region_id = self.region_ids[index]
-        with open(self.json_fs[index], 'r') as r:
-            region_id_graph_map = json.load(r)
+        # with open(self.json_fs[index], 'r') as r:
+        #     region_id_graph_map = json.load(r)
+        region_id_graph_map = self.region_id_graph_maps[index]
 
         region_graph = region_id_graph_map[region_id]
         region_caption = region_graph['phrase']  # type:str
