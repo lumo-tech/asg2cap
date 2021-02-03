@@ -33,7 +33,7 @@ class GlobalParams(Params):
 
         self.num_workers = 4
 
-        self.ema = True
+        self.ema = False
         self.ema_alpha = 0.999
 
         self.val_size = 10000
@@ -60,7 +60,7 @@ class GlobalParams(Params):
         self.dropout = 0.5
         self.fix_word_embed = False
         self.freeze = False
-        self.greedy_or_beam = False
+        self.greedy_or_beam = True
         self.hidden2word = False
         self.hidden_size = 512
         self.max_words_in_sent = 25
@@ -76,7 +76,7 @@ class GlobalParams(Params):
         self.tie_embed = True
         self.weight_decay = 0
         self.dim_embed = 512
-        self.dim_fts = [2048,512]
+        self.dim_fts = [2048, 512]
         self.dropout = 0
         self.freeze = False
         self.is_embed = True

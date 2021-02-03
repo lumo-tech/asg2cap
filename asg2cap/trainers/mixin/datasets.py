@@ -30,7 +30,9 @@ class BaseSupDatasetMixin(DatasetMixin):
             DatasetBuilder()
                 .add_delegate(asg_del)
                 .zip_mode()
-                .DataLoader(batch_size=params.batch_size, collate_fn=convert_batch_sparse_matrix_collate_fn)
+                .DataLoader(batch_size=params.batch_size,
+                            drop_last=True,
+                            collate_fn=convert_batch_sparse_matrix_collate_fn)
         )
         return loader
 

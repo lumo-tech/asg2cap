@@ -36,8 +36,6 @@ class BaseTrainer(callbacks.BaseCBMixin,
         meter.Lall.backward()
         self.optim.step()
 
-        # self.acc_precise_(logits.argmax(dim=1), yss, meter, name='acc')
-
         return meter
 
     def to_logits(self, xs) -> torch.Tensor:
