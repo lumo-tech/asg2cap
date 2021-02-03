@@ -5,7 +5,7 @@ class GlobalParams(Params):
 
     def __init__(self):
         super().__init__()
-        self.epoch = 400
+        self.epoch = 100
         self.optim = self.create_optim('Adam',
                                        lr=2e-4,
                                        weight_decay=0)
@@ -29,9 +29,9 @@ class GlobalParams(Params):
         self.n_classes = 10
         self.topk = (1, 2, 3, 4)
 
-        self.batch_size = 10
+        self.batch_size = 128
 
-        self.num_workers = 4
+        self.num_workers = 8
 
         self.ema = False
         self.ema_alpha = 0.999

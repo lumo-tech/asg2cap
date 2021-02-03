@@ -47,7 +47,8 @@ class BaseTrainer(callbacks.BaseCBMixin,
         int2sent_func = Int2Sent()
         meter = Meter()
         with torch.no_grad():
-            for batch_data in dataloader:
+            for i, batch_data in enumerate(dataloader):
+                self.logger.inline(i, len(dataloader))
                 if params.greedy_or_beam:
                     from thextra.inferences import sample_decode as decode_func
                 else:
