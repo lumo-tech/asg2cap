@@ -32,6 +32,7 @@ class BaseSupDatasetMixin(DatasetMixin):
                 .zip_mode()
                 .DataLoader(batch_size=params.batch_size,
                             drop_last=True,
+                            num_workers=params.num_workers,
                             collate_fn=convert_batch_sparse_matrix_collate_fn)
         )
         return loader
