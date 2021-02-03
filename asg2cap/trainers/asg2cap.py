@@ -40,7 +40,7 @@ class BaseTrainer(callbacks.BaseCBMixin,
 
         # meter.update(timeit.meter(ratio=False))
 
-        timeit.meter('a_trn')
+        timeit.mark('a_trn')
         meter = timeit.meter(ratio=False)
         timeit.clear()
         return meter
