@@ -38,6 +38,7 @@ class BaseTrainer(callbacks.BaseCBMixin,
         self.optim.step()
 
         meter.update(timeit.meter(ratio=False))
+        timeit.clear()
         return meter
 
     def to_logits(self, xs) -> torch.Tensor:
