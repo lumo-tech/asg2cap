@@ -39,14 +39,12 @@ class BaseSupDatasetMixin(DatasetMixin):
     def datasets(self, params: GlobalParams):
         dataset_fn = datasets[params.dataset]
 
-        train_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train',
-                                                                          'asg2cap/ControllableImageCaption/MSCOCO'),
+        rel_path = 'asg2cap/ControllableImageCaption/MSCOCO'
+        train_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train', rel_path),
                                                                params)
-        val_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('val',
-                                                                        'asg2cap/ControllableImageCaption/MSCOCO'),
+        val_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train', rel_path),
                                                              params)
-        test_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('test',
-                                                                         'asg2cap/ControllableImageCaption/MSCOCO'),
+        test_dataloader = BaseSupDatasetMixin._build_datasets(dataset_fn('train', rel_path),
                                                               params)
 
         self.regist_databundler(train=train_dataloader,
