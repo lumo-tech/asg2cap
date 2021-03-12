@@ -13,6 +13,6 @@ class BaseCBMixin(Trainer):
 
         callbacks.TimingCheckpoint(10).hook(self)
 
-        callbacks.LRSchedule().hook(self)  # auto get params.lr_sche to apply lr rate
+        # callbacks.LRSchedule().hook(self)  # auto get params.lr_sche to apply lr rate
         if params.ema:
             callbacks.EMAUpdate().hook(self)  # auto update module named with prefix `ema`
