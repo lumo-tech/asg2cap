@@ -11,11 +11,9 @@ if __name__ == '__main__':
 
 import torch
 from thexp import Trainer, Meter
-from torch.nn import functional as F
 
 from trainers import GlobalParams
 from trainers.mixin import *
-from thexp.utils.timing import timeit
 
 
 class BaseTrainer(callbacks.BaseCBMixin,
@@ -26,9 +24,8 @@ class BaseTrainer(callbacks.BaseCBMixin,
                   Trainer):
 
     def train_batch(self, eidx, idx, global_step, batch_data, params: GlobalParams, device: torch.device):
-        super().train_batch(eidx, idx, global_step, batch_data, params, device)
-        # timeit.mark('a_load')
         meter = Meter()
+
         logits = self.model(batch_data)
 
         meter.Lall = meter.Lall + self.loss_cap_(logits, batch_data['caption_ids'], batch_data['caption_masks'],
@@ -39,9 +36,6 @@ class BaseTrainer(callbacks.BaseCBMixin,
         self.optim.step()
 
         return meter
-
-    def to_logits(self, xs) -> torch.Tensor:
-        return self.model(torch.rand(xs.shape[0], params.n_classes))
 
     def test_eval_logic(self, dataloader, params: GlobalParams):
         params.topk = params.default([1, 5])

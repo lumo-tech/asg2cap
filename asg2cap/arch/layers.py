@@ -1,13 +1,8 @@
-import torch.nn as nn
 import torch
-
+import torch.nn as nn
 from thexp import Logger
 
 log = Logger()
-
-
-# import framework.configbase
-# import framework.ops
 
 
 class RGCNLayer(nn.Module):

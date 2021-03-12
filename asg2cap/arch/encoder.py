@@ -1,10 +1,11 @@
-from torch import nn as nn
 import torch
+from thexp import Logger
+from torch import nn as nn
 from torch.nn import functional as F
+
 from arch.base import gen_order_embeds
 from arch.base import l2norm
 from arch.layers import RGCNLayer
-from thexp import Logger
 
 log = Logger()
 

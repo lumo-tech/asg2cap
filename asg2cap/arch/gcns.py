@@ -1,8 +1,6 @@
-import numpy as np
 import torch
-from arch import encoder, layers
-from torch import nn
 from thexp import Logger
+from torch import nn
 
 log = Logger()
 

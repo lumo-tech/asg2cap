@@ -1,21 +1,23 @@
-from typing import Union, Iterable, List
-from scipy import sparse
-from collections import Counter
-import numpy as np
-import h5py
 import json
+from collections import Counter
+from typing import Union, Iterable, List
 
+import h5py
+import numpy as np
+from scipy import sparse
 from thexp import Delegate
+from thexp import Logger
 from thexp.frame.builder import X, Y, ID, _Value
+
 from data import transforms
 
-from thexp import Logger
-
 log = Logger()
-from thexp.utils.timing import timeit
 
 
 class ASGLoadDelegate(Delegate):
+    """
+    dataset in ASG
+    """
 
     def __init__(self,
                  region_id: List[str], json_fs: List[str], hdf5_fs: List[str],
@@ -32,16 +34,6 @@ class ASGLoadDelegate(Delegate):
 
         self.region_ids = region_id
         self.json_fs = json_fs
-
-        # self.region_id_graph_maps = []
-        #
-        # _size = len(json_fs)
-        # log.info('load jsons')
-        # for i, f in enumerate(json_fs):
-        #     log.inline(i, _size)
-        #     with open(f, 'r') as r:
-        #         region_id_graph_map = json.load(r)  # type:dict
-        #         self.region_id_graph_maps.append(region_id_graph_map)
 
         self.hdf5_fs = hdf5_fs
 
@@ -141,7 +133,6 @@ class ASGLoadDelegate(Delegate):
                 attn_features.append(_rel_box_features)
                 attr_order_idxs.append(2)
                 node_types.append(2)
-
 
                 self.add_rel_subj_edge(_edges, _n, _obj_id_to_graph_id[graph['subject_id']])
                 self.add_rel_obj_edge(_edges, _n, _obj_id_to_graph_id[graph['object_id']])

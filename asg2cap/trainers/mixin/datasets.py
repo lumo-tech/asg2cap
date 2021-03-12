@@ -1,12 +1,11 @@
-from thexp import Trainer
-from data import delegate
-from trainers import GlobalParams
-from thexp.contrib.data import splits
 from thexp import DatasetBuilder
+from thexp import Trainer
 
-from data.transforms import ToTensor
-from data.dataxy import datasets
+from data import delegate
 from data.collate_fns import convert_batch_sparse_matrix_collate_fn
+from data.dataxy import datasets
+from data.transforms import ToTensor
+from trainers import GlobalParams
 
 toTensor = ToTensor()
 
@@ -22,6 +21,8 @@ class BaseSupDatasetMixin(DatasetMixin):
     @staticmethod
     def _build_datasets(datas, params: GlobalParams):
         region_ids, json_fs, hdf5_fs, mp_ids, mp_fts = datas
+
+        # can be seen as Dataset that has __getitem__ __len__ function
         asg_del = delegate.ASGLoadDelegate(region_id=region_ids,
                                            json_fs=json_fs, hdf5_fs=hdf5_fs,
                                            mp_fts=mp_fts, mp_ids=mp_ids,

@@ -1,17 +1,8 @@
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from torch import nn
 from torch.nn import functional as F
 
 from arch.attentions import GlobalAttention
-from arch.base import beam_search_decode, sample_decode
-
-# import caption.decoders.attention
-# from framework.modules.embeddings import Embedding
-# from framework.modules.global_attention import GlobalAttention
-
-# from controlimcap.decoders.cfattention import ContentFlowAttentionDecoder
 from arch.embedding import Embedding
 
 
