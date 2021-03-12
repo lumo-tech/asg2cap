@@ -18,7 +18,7 @@ python3 trainers/asg2cap.py
 
 ## Inference
 
-see [dataset_eval.ipynb](asg2cap/dataset_eval.ipynb) for an example
+see [dataset_eval.ipynb](asg2cap/dataset_eval.ipynb)(or open in [nbviewer](https://nbviewer.jupyter.org/github/thexp/asg2cap/blob/main/asg2cap/dataset_eval.ipynb)) for an example
 
 ![](example/example.png)
 
