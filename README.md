@@ -6,6 +6,8 @@ framework [thexp](https://github.com/sailist/thexp).
 
 > Note: Only core `rgcn.flow.memory` model and greedy decode method tested.
 
+
+
 ## Train
 
 ```shell
@@ -17,6 +19,8 @@ python3 trainers/asg2cap.py
 ## Inference
 
 see [dataset_eval.ipynb](asg2cap/dataset_eval.ipynb) for an example
+
+![](example/example.png)
 
 ## Dataset construction
 
