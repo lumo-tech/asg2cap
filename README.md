@@ -1,7 +1,8 @@
 # asg2cap
-
 Simple reimplementation of [asg2cap](https://github.com/cshizhe/asg2cap) by using my pytorch
 framework [thexp](https://github.com/sailist/thexp).
+
+> [Paper: Say As You Wish: Fine-grained Control of Image Caption Generation with Abstract Scene Graphs](https://arxiv.org/abs/2003.00387)
 
 > Note: Only core `rgcn.flow.memory` model and greedy decode method tested.
 
