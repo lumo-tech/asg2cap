@@ -164,13 +164,13 @@ Reimplement https://github.com/cshizhe/asg2cap
  - 
 
 
-# 数据字段解释
-
-数据一共有三大部分，包括：
-
-- public_split，存储 train/val/test 的文件名列表，以 npy 格式进行组织
-- region_file，存储
 
 ## TODOs
 
-两个
+ - [ ] 数据集解释
+ - [ ] 预训练模型提供
+ 
+ 
+## 疑问
+ - [ ] box 的生成似乎有误
+ - [ ] 我这边模型似乎会倾向于过拟合
