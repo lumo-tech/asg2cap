@@ -136,3 +136,4 @@ repo.v1.json
 *.pth
 *.npy
 *.ckpt
+.cache/
