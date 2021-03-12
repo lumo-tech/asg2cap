@@ -110,7 +110,7 @@ class ASGLoadDelegate(Delegate):
 
             attn_features.append(_box_features)
             attr_order_idxs.append(0)
-            node_types.append(1)
+            node_types.append(0)
 
             _n += 1
             if _n >= self.max_attn_len:
@@ -142,8 +142,11 @@ class ASGLoadDelegate(Delegate):
                 attr_order_idxs.append(2)
                 node_types.append(2)
 
+
                 self.add_rel_subj_edge(_edges, _n, _obj_id_to_graph_id[graph['subject_id']])
                 self.add_rel_obj_edge(_edges, _n, _obj_id_to_graph_id[graph['object_id']])
+
+                # 双向边
                 self.add_flow_edge(_flow_edges,
                                    _obj_id_to_graph_id[graph['object_id']],
                                    _obj_id_to_graph_id[graph['subject_id']],
