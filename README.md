@@ -5,6 +5,18 @@ framework [thexp](https://github.com/sailist/thexp).
 
 > Note: Only core `rgcn.flow.memory` model and greedy decode method tested.
 
+## Train
+
+```shell
+git clone --depth=1 https://github.com/thexp/asg2cap
+cd asg2cap/asg2cap
+python3 trainers/asg2cap.py
+```
+
+## Inference
+
+see [dataset_eval.ipynb](asg2cap/dataset_eval.ipynb) for an example
+
 ## Dataset construction
 
 ### MSCOCO
@@ -167,6 +179,9 @@ Each relationship in `relationships` contains its `relationship_id`, `name`, and
 
 
 ```
+
+
+
 
 ## Question
 
