@@ -1,19 +1,15 @@
-from typing import Dict, Callable, Tuple
-import json
 import os
 
-from PIL import Image
+import numpy as np
 from thexp import globs
 from thexp.decorators import regist_func
-from thexp.base_classes import llist
-import numpy as np
 
 # globs.add_value('datasets', 'path/to/all_datasets/', level=globs.LEVEL.globals)
 root = globs['datasets']
+assert root is None, "add root path by call `globs.add_value('datasets', 'path/to/all_datasets/', level=globs.LEVEL.globals)`"
 
 datasets = {
-    # 'cifar10': cifar10,
-}  # type:Dict[str,Callable[[str],Tuple[llist,llist]]]
+}
 
 split_map = {
     'train': 'trn',
@@ -25,11 +21,14 @@ split_map = {
 @regist_func(datasets)
 def mscoco(split='train', set_root='MSCOCO'):
     """
-    加载流程：
-        根据 public_split 加载相应的 json
-        根据 json 生成 region_id 和 hdf5 file 的对应关系
-        一个 region_id 对应一个 sample
-    :param split:
+    mscoco2014 dataset provided in https://github.com/cshizhe/asg2cap
+
+    load process:
+     - generate json files by `public_split`
+     - generate relationship between `region_id` and hdf5 file by json file generated last step
+     - then a sample will have one region_id (unique key)
+
+    :param split: `train` `eval` or `test`
     :return:
     """
     _split_key = split_map.get(split, split)

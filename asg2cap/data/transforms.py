@@ -1,7 +1,8 @@
-from torchvision.transforms import ToTensor
-import numpy as np
 import json
 import os
+
+import numpy as np
+from torchvision.transforms import ToTensor
 
 word2int_file = os.path.join(os.path.dirname(__file__), 'word2int.json')
 word2int = json.load(open(word2int_file))  # type:dict
@@ -10,16 +11,6 @@ int2word = {i: w for w, i in word2int.items()}
 BOS = word2int.get('<BOS>', 0)
 EOS = word2int.get('<EOS>', 1)
 UNK = word2int.get('<UNK>', 2)
-
-
-class Word2Int:
-    def __call__(self, item):
-        pass
-
-
-class Int2Word:
-    def __call__(self, item):
-        pass
 
 
 class Sent2Int:
@@ -85,3 +76,6 @@ class FitFeatureLen:
                 new_ft = attn_ft[idxs]
             mask[:] = True
         return np.array(new_ft), mask
+
+
+ToTensor = ToTensor

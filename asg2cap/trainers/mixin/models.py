@@ -1,11 +1,8 @@
-from torch import nn
-
-from thexp import Trainer
-from thexp.contrib import EMA, ParamGrouper
-
-import arch
-from .. import GlobalParams
 import torch
+from thexp import Trainer
+
+from arch.gcns import ASGModel
+from .. import GlobalParams
 
 
 def load_encoder(params: GlobalParams):
@@ -56,42 +53,17 @@ class ModelMixin(Trainer):
 class AsgModelMixin(ModelMixin):
     """base end-to-end model"""
 
-    def predict(self, xs) -> torch.Tensor:
+    def predict(self, batch_data) -> torch.Tensor:
         with torch.no_grad():
-            if self.params.ema:
-                model = self.ema_model
-            else:
-                model = self.model
-            if not self.params.with_fc:
-                return model.fc(model(xs))
-            return model(xs)
+            model = self.model
+            return model(batch_data)
 
     def models(self, params: GlobalParams):
         encoder, attn_encoder = load_encoder(params)
         decoder = load_decoder(params)
 
-        from arch.gcns import ASGModel
+        self.model = ASGModel(attn_encoder, encoder, decoder, params=params)
 
-        model = ASGModel(attn_encoder, encoder, decoder, params=params)
-
-        if params.distributed:
-            from torch.nn.modules import SyncBatchNorm
-            model = SyncBatchNorm.convert_sync_batchnorm(model.cuda())
-            self.model = torch.nn.parallel.DistributedDataParallel(model, device_ids=[params.local_rank])
-        else:
-            self.model = model
-
-        if params.ema:
-            self.ema_model = EMA(self.model)
-
-        grouper = ParamGrouper(self.model)
-        # noptim = params.optim.args.copy()
-        param_groups = [
-            grouper.create_param_group(attn_encoder.parameters(), **params.optim.args),
-            grouper.create_param_group(encoder.parameters(), **params.optim.args),
-            grouper.create_param_group(decoder.parameters(), **params.optim.args),
-        ]
-
-        self.optim = params.optim.build(param_groups)
+        self.optim = params.optim.build(self.model.parameters())
         if not params.distributed:
             self.to(self.device)
